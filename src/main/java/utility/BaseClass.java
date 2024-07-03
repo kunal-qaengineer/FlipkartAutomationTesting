@@ -44,7 +44,7 @@ public class BaseClass {
 									test.log(Status.SKIP, result.getName())	;
 								  }
 							
-							driver.quit();
+						//	driver.quit();
 			}
 	
 	@AfterTest
