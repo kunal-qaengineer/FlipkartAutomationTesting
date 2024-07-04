@@ -37,7 +37,10 @@ public class LandingPage {
 	@FindBy (xpath = "//span[@role='button']")private WebElement crossButttonnLoginPopup;
 	@FindBy (xpath = "//button[@type='button']")private WebElement buyNowButtonOnMobileDetailssPage;
 	@FindBy (xpath = "//button[@class='QqFHMw vslbG+ In9uk2']")private WebElement addToCartButtonOnProductDetailsPage;
-	
+	@FindBy (xpath = "(//span[@class='b5rp0W'])[1]")private WebElement totlaPriceOfMobileOnProductDetailsPage;
+	@FindBy (xpath = "(//span[@class='_6HMXbu'])[1]")private WebElement discountPriceOnProductDetailsPage;
+	@FindBy (xpath = "(//span[@class='_6HMXbu'])[2]")private WebElement deliveryChargesOnProductDetailsPage;
+	@FindBy (xpath = "(//div[@class='_1Y9Lgu'])[2]")private WebElement newPriceByReducingDiscountAndDeliveryChargesOnProductDetailsPage;
 	
 	
 	public LandingPage(WebDriver driver) {
@@ -217,8 +220,49 @@ public class LandingPage {
 	}
 	
 	
+	public int expectedBuyingPriceAfterdiscountAndDeliveryChargesReducedFromTotalAmount() {
+		
+		//delivery charges are free
+		int deliveryCharges =0;
+		
+		// Extract text from elements
+		 String buyingPriceText = newPriceByReducingDiscountAndDeliveryChargesOnProductDetailsPage.getText();
+		 String totalPriceText = totlaPriceOfMobileOnProductDetailsPage.getText();
+		 String discountText = discountPriceOnProductDetailsPage.getText();
+		
+		
+		// Remove non-numeric characters (e.g., currency symbols, commas)
+	    String buyingPriceStr = buyingPriceText.replaceAll("[^0-9]", "");
+	    String totalPriceStr = totalPriceText.replaceAll("[^0-9]", "");
+	    String discountStr = discountText.replaceAll("[^0-9]", "");
+	   
+	    
+	    // Convert to integers
+	    int buyingPrice = Integer.parseInt(buyingPriceStr);
+	    int totalPrice = Integer.parseInt(totalPriceStr);
+	    int discount = Integer.parseInt(discountStr);
+	  
+	    
+	    // Print values for debugging
+	    System.out.println("Buying Price: " + buyingPrice);
+	    System.out.println("Total Price: " + totalPrice);
+	    System.out.println("Discount: " + discount);
+	    System.out.println("Delivery Charges: " + deliveryCharges);
+	    
+	    // Calculate expected buying price
+	    int expectedBuyingPrice = totalPrice - discount + deliveryCharges;
+	    
+	    // Print expected buying price for debugging
+	    System.out.println("Expected Buying Price: " + expectedBuyingPrice);
+	    return expectedBuyingPrice;
+	}
 	
-	
+	public int buyingPriceOfTheProductOnAddToCartPage() {
+		 String buyingPriceText = newPriceByReducingDiscountAndDeliveryChargesOnProductDetailsPage.getText();
+		 String buyingPriceStr = buyingPriceText.replaceAll("[^0-9]", "");
+		 int buyingPrice = Integer.parseInt(buyingPriceStr);
+		 return buyingPrice;
+	}
 	
 	
 	

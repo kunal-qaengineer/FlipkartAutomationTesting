@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test thread-count="5" name="Test"> 
 	  
-	  <parameter name="nameOfCheckbox" value="MOTOROLA"></parameter>
+	  <parameter name="nameOfCheckbox" value="SAMSUNG"></parameter>
 	  <parameter name="inputOnSearch" value="mobile phones"></parameter>
 	  <parameter name="mobileBrandName" value="SAMSUNG"></parameter>
 	  <parameter name="xMinPriceOnSlider" value="147"></parameter>
@@ -13,7 +13,7 @@
 	  <classes>
 		  <class name="test.LandingPageTesting">
 			  <methods>
-				  <include name="verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage"></include>
+				  <include name="verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile"></include>
 				 
 			  </methods>
 		  </class>

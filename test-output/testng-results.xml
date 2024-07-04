@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-07-04T15:53:23 IST" name="Suite" finished-at="2024-07-04T15:54:21 IST" duration-ms="57875">
+  <suite started-at="2024-07-04T18:13:41 IST" name="Suite" finished-at="2024-07-04T18:14:40 IST" duration-ms="58371">
     <groups>
     </groups>
-    <test started-at="2024-07-04T15:53:23 IST" name="Test" finished-at="2024-07-04T15:54:21 IST" duration-ms="57875">
+    <test started-at="2024-07-04T18:13:41 IST" name="Test" finished-at="2024-07-04T18:14:40 IST" duration-ms="58371">
       <class name="test.LandingPageTesting">
-        <test-method is-config="true" signature="logReport()[pri:0, instance:test.LandingPageTesting@75d3a5e0]" started-at="2024-07-04T15:53:23 IST" name="logReport" finished-at="2024-07-04T15:53:24 IST" duration-ms="184" status="PASS">
+        <test-method is-config="true" signature="logReport()[pri:0, instance:test.LandingPageTesting@663c9e7a]" started-at="2024-07-04T18:13:41 IST" name="logReport" finished-at="2024-07-04T18:13:42 IST" duration-ms="193" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- logReport -->
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:test.LandingPageTesting@75d3a5e0]" started-at="2024-07-04T15:53:24 IST" name="launchBrowser" finished-at="2024-07-04T15:53:27 IST" duration-ms="3249" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:test.LandingPageTesting@663c9e7a]" started-at="2024-07-04T18:13:42 IST" name="launchBrowser" finished-at="2024-07-04T18:13:45 IST" duration-ms="3235" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method signature="verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage(java.lang.String,java.lang.String,java.lang.String,int,int)[pri:0, instance:test.LandingPageTesting@75d3a5e0]" started-at="2024-07-04T15:53:27 IST" name="verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage" finished-at="2024-07-04T15:54:21 IST" duration-ms="54219" status="PASS">
+        <test-method signature="verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile(java.lang.String,java.lang.String,java.lang.String,int,int)[pri:0, instance:test.LandingPageTesting@663c9e7a]" started-at="2024-07-04T18:13:45 IST" name="verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile" finished-at="2024-07-04T18:14:40 IST" duration-ms="54707" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -45,19 +45,19 @@
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage -->
-        <test-method is-config="true" signature="logResult(org.testng.ITestResult)[pri:0, instance:test.LandingPageTesting@75d3a5e0]" started-at="2024-07-04T15:54:21 IST" name="logResult" finished-at="2024-07-04T15:54:21 IST" duration-ms="3" status="PASS">
+        </test-method> <!-- verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile -->
+        <test-method is-config="true" signature="logResult(org.testng.ITestResult)[pri:0, instance:test.LandingPageTesting@663c9e7a]" started-at="2024-07-04T18:14:40 IST" name="logResult" finished-at="2024-07-04T18:14:40 IST" duration-ms="4" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage status=SUCCESS method=LandingPageTesting.verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage(java.lang.String,java.lang.String,java.lang.String,int,int)[pri:0, instance:test.LandingPageTesting@75d3a5e0] output={null}]]]>
+                <![CDATA[[TestResult name=verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile status=SUCCESS method=LandingPageTesting.verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile(java.lang.String,java.lang.String,java.lang.String,int,int)[pri:0, instance:test.LandingPageTesting@663c9e7a] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- logResult -->
-        <test-method is-config="true" signature="clearData()[pri:0, instance:test.LandingPageTesting@75d3a5e0]" started-at="2024-07-04T15:54:21 IST" name="clearData" finished-at="2024-07-04T15:54:21 IST" duration-ms="195" status="PASS">
+        <test-method is-config="true" signature="clearData()[pri:0, instance:test.LandingPageTesting@663c9e7a]" started-at="2024-07-04T18:14:40 IST" name="clearData" finished-at="2024-07-04T18:14:40 IST" duration-ms="207" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- clearData -->

@@ -290,9 +290,65 @@ public class LandingPageTesting extends BaseClass {
 		Assert.assertEquals(driver.getTitle(), "Shopping Cart | Flipkart.com");
 		}
 	
-	}
+	
 
+	@Parameters({"inputOnSearch", "mobileBrandName", "nameOfCheckboxForRAM", "xMinPriceOnSlider", "xMaxPriceOnSlider"})
+	@Test
+	public void verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile(String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider) throws InterruptedException {
+		test = reports.createTest("verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile");
+		
+		
+		//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
+		LandingPage landingpage = new LandingPage(driver);
+		landingpage.enterInputOnSearchInputField(inputOnSearch);
+		Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
+		landingpage.clickEnterByKeyboard(driver);
+		Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+		landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
+		//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
+		Thread.sleep(10000);
+		landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
+		//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+		Thread.sleep(8000);
+		//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
+		landingpage.clickOnBrandMoreOptionsText();
+		Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
+		landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
+		landingpage.clickEnterByKeyboard(driver);
+		Wait.applyExplicitWait("//div[@title='SAMSUNG']");
+		landingpage.clickOnSamsungOptionOnBrandFilterWindow();
+		Wait.applyExplicitWait("//span[text()='Apply Filters']");
+		landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
+	//	Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+		Thread.sleep(8000);
+		//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+		landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
+		//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+		Thread.sleep(8000);
+		//printTheCheapestAndCostliestPhon
+		landingpage.clickOnPriceLowToHigh();
+		Thread.sleep(8000);
+		landingpage.clickOnNameOfCheapestAndCostliestMobilePhoneInFirstPosition();
+		Thread.sleep(8000);
+		//navigate to Product details page
+		ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
+		Wait.applyExplicitWait("//button[@type='button']");
+		
+		//Check this product is in Stock
+		//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
+		landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
+		
+		//click On Add to Cart button
+		landingpage.clickOnAddToCartButtonOnProductDetailsPage();
+		Wait.applyExplicitWait("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");
+		
+		int expectedBuyingPrice=landingpage.expectedBuyingPriceAfterdiscountAndDeliveryChargesReducedFromTotalAmount();
+		
+		 // Assert that the actual buying price matches the expected buying price
+	    Assert.assertEquals(landingpage.buyingPriceOfTheProductOnAddToCartPage(), expectedBuyingPrice, "The buying price is incorrect.");
+		}
 
+}
 	
 	
 

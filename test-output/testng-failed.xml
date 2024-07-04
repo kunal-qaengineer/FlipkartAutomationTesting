@@ -4,15 +4,15 @@
   <test thread-count="5" name="Test(failed)">
     <parameter name="mobileBrandName" value="SAMSUNG"/>
     <parameter name="xMinPriceOnSlider" value="147"/>
-    <parameter name="nameOfCheckbox" value="MOTOROLA"/>
+    <parameter name="nameOfCheckbox" value="SAMSUNG"/>
     <parameter name="xMaxPriceOnSlider" value="-1"/>
     <parameter name="nameOfCheckboxForRAM" value="8 GB and Above"/>
     <parameter name="inputOnSearch" value="mobile phones"/>
     <classes>
       <class name="test.LandingPageTesting">
         <methods>
-          <include name="printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage" invocation-numbers="0"/>
           <include name="logResult"/>
+          <include name="verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile" invocation-numbers="0"/>
           <include name="clearData"/>
           <include name="logReport"/>
           <include name="launchBrowser"/>
