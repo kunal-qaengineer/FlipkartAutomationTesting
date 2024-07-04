@@ -13,7 +13,7 @@
 	  <classes>
 		  <class name="test.LandingPageTesting">
 			  <methods>
-				  <include name="clickOnTheFirstCheapestAndCostliestPhoneOnMobilePhonesPage"></include>
+				  <include name="verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage"></include>
 				 
 			  </methods>
 		  </class>

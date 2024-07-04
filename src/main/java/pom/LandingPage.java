@@ -36,7 +36,7 @@ public class LandingPage {
 	@FindBy (xpath = "//div[@class='KzDlHZ']")private List<WebElement> nameOfMobilePhones;
 	@FindBy (xpath = "//span[@role='button']")private WebElement crossButttonnLoginPopup;
 	@FindBy (xpath = "//button[@type='button']")private WebElement buyNowButtonOnMobileDetailssPage;
-	
+	@FindBy (xpath = "//button[@class='QqFHMw vslbG+ In9uk2']")private WebElement addToCartButtonOnProductDetailsPage;
 	
 	
 	
@@ -212,6 +212,9 @@ public class LandingPage {
 		return buyNowButtonOnMobileDetailssPage.isDisplayed();
 	}
 	
+	public void clickOnAddToCartButtonOnProductDetailsPage() {
+		addToCartButtonOnProductDetailsPage.click();
+	}
 	
 	
 	
