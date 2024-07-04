@@ -3,10 +3,20 @@
 <suite name="Suite">
   <test thread-count="5" name="Test"> 
 	  
-	  <parameter name="nameOfCheckbox" value="MOTOROLA"></parameter>
+	  <parameter name="nameOfCheckbox" value="SAMSUNG"></parameter>
+	  <parameter name="inputOnSearch" value="mobile phones"></parameter>
+	  <parameter name="mobileBrandName" value="SAMSUNG"></parameter>
+	  <parameter name="xMinPriceOnSlider" value="147"></parameter>
+	  <parameter name="xMaxPriceOnSlider" value="-1"></parameter>
+	  <parameter name="nameOfCheckboxForRAM" value="8 GB and Above"></parameter>
 	  
 	  <classes>
-		  <class name="test.LandingPageTesting"></class>
+		  <class name="test.LandingPageTesting">
+			  <methods>
+				  <include name="verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile"></include>
+				 
+			  </methods>
+		  </class>
 	  </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

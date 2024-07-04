@@ -5,9 +5,9 @@
     <classes>
       <class name="test.LandingPageTesting">
         <methods>
-          <include name="selectMotorolaMobileFromBrandsOptionsFromFilter"/>
           <include name="logResult"/>
           <include name="clearData"/>
+          <include name="selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider"/>
           <include name="logReport"/>
           <include name="launchBrowser"/>
         </methods>
