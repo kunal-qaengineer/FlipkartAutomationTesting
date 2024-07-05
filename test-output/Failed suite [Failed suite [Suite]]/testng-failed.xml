@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Failed suite [Failed suite [Suite]]]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)(failed)(failed)">
+    <parameter name="mobileBrandName" value="SAMSUNG"/>
+    <parameter name="xMinPriceOnSlider" value="147"/>
+    <parameter name="nameOfCheckbox" value="SAMSUNG"/>
+    <parameter name="xMaxPriceOnSlider" value="-1"/>
+    <parameter name="nameOfCheckboxForRAM" value="8 GB and Above"/>
+    <parameter name="inputOnSearch" value="mobile phones"/>
+    <classes>
+      <class name="test.LandingPageTesting">
+        <methods>
+          <include name="printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage" invocation-numbers="0"/>
+          <include name="logResult"/>
+          <include name="clearData"/>
+          <include name="logReport"/>
+          <include name="launchBrowser"/>
+        </methods>
+      </class> <!-- test.LandingPageTesting -->
+    </classes>
+  </test> <!-- Test(failed)(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [Failed suite [Suite]]] -->

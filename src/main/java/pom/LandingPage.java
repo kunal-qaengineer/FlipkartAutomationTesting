@@ -41,7 +41,16 @@ public class LandingPage {
 	@FindBy (xpath = "(//span[@class='_6HMXbu'])[1]")private WebElement discountPriceOnProductDetailsPage;
 	@FindBy (xpath = "(//span[@class='_6HMXbu'])[2]")private WebElement deliveryChargesOnProductDetailsPage;
 	@FindBy (xpath = "(//div[@class='_1Y9Lgu'])[2]")private WebElement newPriceByReducingDiscountAndDeliveryChargesOnProductDetailsPage;
+	@FindBy (xpath = "//input[@class='p6sArZ']")private WebElement inputFieldForIncreaseProductQuantityOnCartPage;
+	@FindBy (xpath = "//div[@class='eIDgeN']")private WebElement messageThrowsAfterQuantityUpdateOnAddToCartPage;
+	@FindBy (xpath = "(//button[@class='LcLcvv'])[1]")private WebElement minusSignOnAddToCartPageToReduceTheProductQuantity;
+	@FindBy (xpath = "(//button[@class='LcLcvv'])[2]")private WebElement plusSignOnAddToCartPageToReduceTheProductQuantity;
+	@FindBy (xpath = "//div[text()='Remove']")private WebElement removeButtonOnAddToCartPage;
+	@FindBy (xpath = "(//div[text()='Remove'])[1]")private WebElement removeButtonOnRemoveItemPopup;
+	@FindBy (xpath = "//div[@class='eIDgeN']")private WebElement messageThrowsAfterRemoveProductFromCartPage;
+	@FindBy (xpath = "//span[text()='Filters']")private WebElement filterTitleAtTopLeft;
 	
+
 	
 	public LandingPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -152,62 +161,42 @@ public class LandingPage {
 		return mobileCategory.isDisplayed();
 	}
 	
-/*	public void selectCheapestAndCostliestPriceOfPhone() {
-		int size =priceOfMobilePhones.size();
-		System.out.println(size);		
-		for(int i=0; i<size; i++) 
-				{
-						 WebElement priceOfMobile=priceOfMobilePhones.get(i);
-						 String price=priceOfMobile.getText();
-						 
-						 System.out.println(price);
-					//	 System.out.println(price.equals(nameOfCheckbox));
-						 while()
-								 {							 
-							 		inputCheckBoxForRAM.click();
-									 break;
-								 }	
-				}
-	
-	}
-*/
-	
+
 	public void clickOnPriceLowToHigh() {
 		sortByPriceLowToHigh.click();
 	}
 	
 	public boolean priceLowToHighSortOptionIsSelected() {
 		return sortByPriceLowToHigh.isSelected();
-	}
+	}	
 	
-
-	
-	
-	public void printNameOfCheapestAndCostliestMobilePhone() {
+	public String printNameOfCheapestAndCostliestMobilePhone(int selectMobileFromTop) {
 		//	int sizeOfMobileNames =nameOfMobilePhones.size();			
 		//	System.out.println(sizeOfMobileNames);		
-						 WebElement nameOfMobilePhone=nameOfMobilePhones.get(0);
+						 WebElement nameOfMobilePhone=nameOfMobilePhones.get(selectMobileFromTop);
 						 String titleOfMobile=nameOfMobilePhone.getText();						 
 						 System.out.println(titleOfMobile);	
+						 return nameOfMobilePhone.getText();	
 	}
 	
 	
-	public void prinPriceOfCheapestAndCostliestMobilePhone() {
+	public String  prinPriceOfCheapestAndCostliestMobilePhone(int selectMobileFromTopAfterFilterPriceLowToHigh) {
 		//	int sizeOfMobilePhonesPrice =priceOfMobilePhones.size();			
 		//System.out.println(sizeOfMobilePhonesPrice);		
-						 WebElement priceOfMobilePhone=priceOfMobilePhones.get(0);
+						 WebElement priceOfMobilePhone=priceOfMobilePhones.get(selectMobileFromTopAfterFilterPriceLowToHigh);
 						 String cheapestMobilePrice=priceOfMobilePhone.getText();						 
 						 System.out.println(cheapestMobilePrice);	
+						return  priceOfMobilePhone.getText();	
 	}
 	
 	public void clickOnCrossButttonnLoginPopup() {
 		crossButttonnLoginPopup.click();
 	}
 	
-	public void clickOnNameOfCheapestAndCostliestMobilePhoneInFirstPosition() {
+	public void clickOnNameOfCheapestAndCostliestMobilePhone(int selectMobileFromTopAfterFilterPriceLowToHigh) {
 		//	int sizeOfMobileNames =nameOfMobilePhones.size();			
 		//	System.out.println(sizeOfMobileNames);		
-						 WebElement nameOfMobilePhone=nameOfMobilePhones.get(0);
+						 WebElement nameOfMobilePhone=nameOfMobilePhones.get(selectMobileFromTopAfterFilterPriceLowToHigh);
 						 nameOfMobilePhone.click();
 	}
 	
@@ -264,6 +253,65 @@ public class LandingPage {
 		 return buyingPrice;
 	}
 	
+	public void enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(WebDriver driver, String productQuantityToIncrease) {
+	    Actions action = new Actions(driver);
+	    
+	    // Move to the input field and click to focus
+	    action.moveToElement(inputFieldForIncreaseProductQuantityOnCartPage).click().perform();
+	    
+	    // Select all text in the input field (Ctrl + A)
+	    action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();
+	    
+	    // Clear the input field (send backspace or delete)
+	    action.sendKeys(Keys.BACK_SPACE).perform();
+	    
+	    // Enter '2' in the input field
+	    action.sendKeys(productQuantityToIncrease).perform();
+	    
+	    // (Optional) Submit the form or press Enter if needed
+	    // action.sendKeys(Keys.ENTER).perform();
+	}
+	
+	public String getTextFromInputFieldForIncreaseProductQuantityOnCartPage(WebDriver driver) {
+	    // Move to the input field to ensure it's visible and focused
+	    Actions action = new Actions(driver);
+	    action.moveToElement(inputFieldForIncreaseProductQuantityOnCartPage).perform();
+
+	    // Retrieve and return the text from the input field
+	    return inputFieldForIncreaseProductQuantityOnCartPage.getAttribute("value");
+	}
+	
+	public boolean messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed() {
+		return messageThrowsAfterQuantityUpdateOnAddToCartPage.isDisplayed();
+	}
+	
+	public String getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage() {
+		return messageThrowsAfterQuantityUpdateOnAddToCartPage.getText();
+	}
+	
+	public void clickOnMinusSignOnAddToCartPageToReduceTheProductQuantity() {
+		minusSignOnAddToCartPageToReduceTheProductQuantity.click();
+	}
+	
+	public void clickOnRemoveButtonOnAddToCartPage() {
+		removeButtonOnAddToCartPage.click();
+	}
+	
+	public void clickOnRemoveButtonOnRemoveItemPopup() {
+		removeButtonOnRemoveItemPopup.click();
+	}
+	
+	public boolean messageThrowsAfterRemoveProductFromCartPageIsDisplayed() {
+		return messageThrowsAfterRemoveProductFromCartPage.isDisplayed();
+	}
+	
+	public String getTextFromMessageThrowsAfterRemoveProductFromCartPage() {
+		return messageThrowsAfterRemoveProductFromCartPage.getText();
+	}
+	
+	public boolean filterTitleIsDisplayedAtTopLeft() {
+		return filterTitleAtTopLeft.isDisplayed();
+	}
 	
 	
 	
