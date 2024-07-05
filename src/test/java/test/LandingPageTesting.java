@@ -152,8 +152,7 @@ public class LandingPageTesting extends BaseClass {
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.printNameOfCheapestAndCostliestMobilePhone(0);
-				landingpage.prinPriceOfCheapestAndCostliestMobilePhone(0);
-				
+				landingpage.prinPriceOfCheapestAndCostliestMobilePhone(0);				
 				Assert.assertEquals(landingpage.printNameOfCheapestAndCostliestMobilePhone(0), "SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)");
 		
 		}
@@ -199,8 +198,7 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 				Assert.assertTrue(landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed());
 		}
 		
@@ -242,8 +240,7 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 				Assert.assertTrue(landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed());
 		}
 	
@@ -286,12 +283,10 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 			//Check this product is in Stock
 			//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
-				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
-				
+				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 				Assert.assertTrue(landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed());
 		}
 
@@ -334,12 +329,10 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 			//Check this product is in Stock
 				//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
-				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
-				
+				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
 				Wait.applyExplicitWait("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");
@@ -352,8 +345,7 @@ public class LandingPageTesting extends BaseClass {
 	@Parameters({"inputOnSearch", "mobileBrandName", "nameOfCheckboxForRAM", "xMinPriceOnSlider", "xMaxPriceOnSlider", "selectMobileFromTopAfterFilterPriceLowToHigh"})
 	@Test
 	public void verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile(String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider, int selectMobileFromTopAfterFilterPriceLowToHigh) throws InterruptedException {
-				test = reports.createTest("verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile");
-				
+				test = reports.createTest("verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile");				
 				
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
 				LandingPage landingpage = new LandingPage(driver);
@@ -389,18 +381,14 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 			//Check this product is in Stock
 			//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
-				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
-				
+				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
-				Wait.applyExplicitWait("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");
-				
-				int expectedBuyingPrice=landingpage.expectedBuyingPriceAfterdiscountAndDeliveryChargesReducedFromTotalAmount();
-				
+				Wait.applyExplicitWait("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");				
+				int expectedBuyingPrice=landingpage.expectedBuyingPriceAfterdiscountAndDeliveryChargesReducedFromTotalAmount();				
 			 //Assert that the actual buying price matches the expected buying price
 			    Assert.assertEquals(landingpage.buyingPriceOfTheProductOnAddToCartPage(), expectedBuyingPrice, "The buying price is incorrect.");
 		}
@@ -445,22 +433,18 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 				//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 			//Check this product is in Stock
 				//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
-				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
-				
+				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
-				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"
-				
+				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"				
 			//increase the quantity of the Product by entring the integer number
 				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);
 				System.out.println(landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));
 				//System.out.println(landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");
-				
+				Wait.applyExplicitWait("//div[@class='eIDgeN']");				
 				Assert.assertEquals(landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver), "2");		
 	}
 	
@@ -504,24 +488,19 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 			//Check this product is in Stock
 			//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
-				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
-				
+				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
-			//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"
-				
+			//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"				
 			//increase the quantity of the Product by entring the integer number
-				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);
-				
+				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);				
 				Wait.applyExplicitWait("//div[@class='eIDgeN']");
 				System.out.println(landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));//Ans:productQuantityToIncrease
 				System.out.println(landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
-				System.out.println(landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '3'
-				
+				System.out.println(landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '3'				
 				Assert.assertTrue(landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());		
 	}
 	
@@ -565,31 +544,24 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 				//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 			//Check this product is in Stock
 				//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
-				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
-				
+				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
-				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"
-				
+				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"				
 				//increase the quantity of the Product by entring the integer number
-				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);
-				
+				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);				
 				Wait.applyExplicitWait("//div[@class='eIDgeN']");
 				System.out.println("Increased quantity of the Product :" +landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));//Ans:productQuantityToIncrease
 				System.out.println("Message thows After successfully Increased quantity of the Product : "+landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
-				System.out.println("Actual Message After successfully Increased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '2'
-				
-				
+				System.out.println("Actual Message After successfully Increased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '2'					
 			//decrease the quantity of the Product by click on minus sign
 				landingpage.clickOnMinusSignOnAddToCartPageToReduceTheProductQuantity();
 				Wait.applyExplicitWait("//div[@class='eIDgeN']");
 				System.out.println("Message thows After successfully decreased quantity of the Product : "+landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
-				System.out.println("Actual Message After successfully decreased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '1'
-				
+				System.out.println("Actual Message After successfully decreased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '1'				
 				Assert.assertTrue(landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());		
 	}
 	
@@ -634,42 +606,33 @@ public class LandingPageTesting extends BaseClass {
 				Thread.sleep(8000);
 		//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");
-				
+				Wait.applyExplicitWait("//button[@type='button']");				
 		//Check this product is in Stock
-		//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
-				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();
-				
+		//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.	
+				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 		//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
-				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"
-				
+				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"				
 		//increase the quantity of the Product by entring the integer number
-				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);
-				
+				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);				
 				Wait.applyExplicitWait("//div[@class='eIDgeN']");
 				System.out.println("Increased quantity of the Product :" +landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));//Ans:productQuantityToIncrease
 				System.out.println("Message thows After successfully Increased quantity of the Product : "+landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
-				System.out.println("Actual Message After successfully Increased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '2'
-				
+				System.out.println("Actual Message After successfully Increased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '2'				
 		//decrease the quantity of the Product by click on minus sign
 				landingpage.clickOnMinusSignOnAddToCartPageToReduceTheProductQuantity();
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");
-								
+				Wait.applyExplicitWait("//div[@class='eIDgeN']");								
 		//Click on Remove button to remove the Product from the cart
 				landingpage.clickOnRemoveButtonOnAddToCartPage();
 				Wait.applyExplicitWait("(//div[text()='Remove'])[1]");
 				landingpage.clickOnRemoveButtonOnRemoveItemPopup();
 				Wait.applyExplicitWait("//div[@class='eIDgeN']");
 				System.out.println("Message thows After successfully Removed Product : "+landingpage.messageThrowsAfterRemoveProductFromCartPageIsDisplayed());
-				System.out.println("Actual Message After successfully Removed Product : "+landingpage.getTextFromMessageThrowsAfterRemoveProductFromCartPage());
-				
+				System.out.println("Actual Message After successfully Removed Product : "+landingpage.getTextFromMessageThrowsAfterRemoveProductFromCartPage());				
 				Assert.assertTrue(landingpage.messageThrowsAfterRemoveProductFromCartPageIsDisplayed());		
 	}
 	
 }
-	
-	
 
 	
 /*	
