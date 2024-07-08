@@ -14,6 +14,7 @@
       <class name="test.LandingPageTesting">
         <methods>
           <include name="verifyUserIsAbleToIncreaseTheQuantityOfTheProductInAddToCartPageByUsingTheNumberInput" invocation-numbers="0"/>
+          <include name="printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage" invocation-numbers="0"/>
           <include name="logResult"/>
           <include name="clearData"/>
           <include name="logReport"/>

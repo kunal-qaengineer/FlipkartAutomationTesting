@@ -6,6 +6,8 @@
     <parameter name="xMinPriceOnSlider" value="147"/>
     <parameter name="nameOfCheckbox" value="SAMSUNG"/>
     <parameter name="xMaxPriceOnSlider" value="-1"/>
+    <parameter name="selectMobileFromTopAfterFilterPriceLowToHigh" value="1"/>
+    <parameter name="productQuantityToIncrease" value="2"/>
     <parameter name="nameOfCheckboxForRAM" value="8 GB and Above"/>
     <parameter name="inputOnSearch" value="mobile phones"/>
     <classes>

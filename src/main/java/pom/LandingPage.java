@@ -116,7 +116,7 @@ public class LandingPage {
 		ApplyFilterButtonOnBrandsOptionWindow.click();
 	}
 	
-	public void enterBrandOnsearchBrandInputField(String brand) {
+	public void enterBrandOnSearchBrandInputField(String brand) {
 		searchBrandInputField.sendKeys(brand);
 	}
 	
@@ -269,7 +269,7 @@ public class LandingPage {
 	    action.sendKeys(productQuantityToIncrease).perform();
 	    
 	    // (Optional) Submit the form or press Enter if needed
-	    // action.sendKeys(Keys.ENTER).perform();
+	    action.sendKeys(Keys.ENTER).perform();
 	}
 	
 	public String getTextFromInputFieldForIncreaseProductQuantityOnCartPage(WebDriver driver) {
