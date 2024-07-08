@@ -14,6 +14,9 @@
 	  
 	  <classes>
 		  <class name="test.LandingPageTesting">
+			  <methods>
+				  <include name="selectPriceOfMobileFromTenThousandToTwentyThouandFromPriceFilterSlider"></include>
+			  </methods>
 		  </class>
 	  </classes>
   </test> <!-- Test -->

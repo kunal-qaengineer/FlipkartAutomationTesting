@@ -7,8 +7,8 @@
         <methods>
           <include name="logResult"/>
           <include name="clearData"/>
-          <include name="selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider"/>
           <include name="logReport"/>
+          <include name="verifyAllLinksOnTheFlipkartLandingPageIsWorking"/>
           <include name="launchBrowser"/>
         </methods>
       </class> <!-- test.LandingPageTesting -->

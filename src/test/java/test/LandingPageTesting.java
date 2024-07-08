@@ -11,6 +11,7 @@ import org.testng.asserts.SoftAssert;
 import pojo.Browser;
 import pom.LandingPage;
 import utility.BaseClass;
+import utility.BrokenLinks;
 import utility.ChildBrowser;
 import utility.Wait;
 
@@ -550,47 +551,59 @@ public class LandingPageTesting extends BaseClass {
 				Assert.assertTrue(landingpage.messageThrowsAfterRemoveProductFromCartPageIsDisplayed());		
 	}
 	
-}
-
-	
-/*	
-	@Parameters({"nameOfCheckbox"})
 	@Test
-	public void selectMobileBrandFromBrandsOptionsFromBrandFilter(String nameOfCheckbox) throws InterruptedException {
-		test = reports.createTest("selectMotorolaMobileFromBrandsOptionsFromFilter");
-		LandingPage landingpage = new LandingPage(driver);
-		landingpage.enterInputOnSearchInputField("Mobiles");
-		Wait.applyExplicitWaitForElementVisibility("//button[@aria-label='Search for Products, Brands and More']");
-		landingpage.clickEnterByKeyboard(driver);
-		Wait.applyExplicitWaitForElementVisibility("//div[@class='e+xvXX KvHRYS']");
-		landingpage.clickOnBrandMoreOptionsText();
-		Wait.applyExplicitWaitForElementVisibility("//input[@placeholder='Search Brand']");
-		Thread.sleep(10000);
-		landingpage.selectBrandCheckBoxOnLandingPage(nameOfCheckbox);
-		Wait.applyExplicitWaitForElementVisibility("//span[text()='Apply Filters']");
-		landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-		Wait.applyExplicitWaitForElementVisibility("(//div[text()='MOTOROLA'])[1]");
-		SoftAssert softassert = new SoftAssert();
-		softassert.assertTrue(landingpage.motorolaTextIsDisplayedAtFilters());
-		softassert.assertAll();
+	public void verifyAllLinksOnTheFlipkartLandingPageIsWorking() {
+		test = reports.createTest("verifyAllLinksOnTheFlipkartLandingPageIsWorking");
+		BrokenLinks.checkAllLiksAreWorking();
 	}
 	
+
 	
+	@Parameters({"inputOnSearch", "nameOfCheckbox"})
+	@Test
+	public void selectMobileBrandFromBrandsOptionsFromBrandFilterByIndexing(String inputOnSearch, String nameOfCheckbox) throws InterruptedException {
+		test = reports.createTest("selectMobileBrandFromBrandsOptionsFromBrandFilterByIndexing");
+		//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
+			//Search the Product
+			LandingPageTesting landingpagetesting = new LandingPageTesting();
+			landingpagetesting.searchForProduct(inputOnSearch);	
+			Wait.applyExplicitWaitForElementVisibility("//div[@class='e+xvXX KvHRYS']");
+		//Click on More Brands options
+			LandingPage landingpage = new LandingPage(driver);
+			landingpage.clickOnBrandMoreOptionsText();
+			Wait.applyExplicitWaitForElementVisibility("//input[@placeholder='Search Brand']");
+			Thread.sleep(10000);
+		//Select SAMSUNG brand from multiple brands
+			landingpage.selectBrandCheckBoxOnLandingPage(nameOfCheckbox);
+			Wait.applyExplicitWaitForElementVisibility("//span[text()='Apply Filters']");
+			landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
+			Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
+			System.out.println(landingpage.samsungTextIsDisplayedAtFilters()+ ": samsungTextIsDisplayedAtFilters");
+			System.out.println(landingpage.getTextFromSAMSUNGSelectedFilter());
+		//Check filter is applied successfully
+			SoftAssert softassert = new SoftAssert();
+			softassert.assertTrue(landingpage.samsungTextIsDisplayedAtFilters());
+			softassert.assertAll();
+	}
+
+
 	@Parameters({"inputOnSearch"})
 	@Test
 	public void selectPriceOfMobileFromTenThousandToTwentyThouandFromPriceFilterSlider(String inputOnSearch) throws InterruptedException {
 	test = reports.createTest("selectPriceOfMobileFromTenThousandToTwentyThouandFromPriceFilterSlider");
-	LandingPage landingpage = new LandingPage(driver);
-	landingpage.enterInputOnSearchInputField(inputOnSearch);
-	Wait.applyExplicitWaitForElementVisibility("//button[@aria-label='Search for Products, Brands and More']");
-	landingpage.clickEnterByKeyboard(driver);
-	Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-	landingpage.selectMinTenThousandPriceOnPriceFilterSlider(driver);
-	Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[1]/div[2]/div[1]/div/div[2]");
-	//Thread.sleep(10000);
-	landingpage.selectMaxTwentyThousandPriceOnPriceFilterSlider(driver);
-	Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[4]");
-	Assert.assertTrue(landingpage.checkPriceIsDisplayedFromTenThousandToTwentyThousand());
+		//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
+			//Search the Product
+			LandingPageTesting landingpagetesting = new LandingPageTesting();
+			landingpagetesting.searchForProduct(inputOnSearch);	
+			Wait.applyExplicitWaitForElementVisibility("//div[@class='e+xvXX KvHRYS']");	
+		//Select Price on Price Filter
+			landingpagetesting.applyPriceFilter(47, -95);
+			Thread.sleep(10000);
+			LandingPage landingpage = new LandingPage(driver);
+			Assert.assertEquals(landingpage.priceFilterDropDownMaximumIsSelected(), "₹10000-₹20000");
 	}
-*/
+	
+
+
+}
 

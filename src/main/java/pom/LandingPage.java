@@ -10,6 +10,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import net.bytebuddy.description.annotation.AnnotationList.Empty;
+
 public class LandingPage {
 	
 	@FindBy (xpath = "")private WebElement x;
@@ -49,6 +51,8 @@ public class LandingPage {
 	@FindBy (xpath = "(//div[text()='Remove'])[1]")private WebElement removeButtonOnRemoveItemPopup;
 	@FindBy (xpath = "//div[@class='eIDgeN']")private WebElement messageThrowsAfterRemoveProductFromCartPage;
 	@FindBy (xpath = "//span[text()='Filters']")private WebElement filterTitleAtTopLeft;
+	@FindBy (xpath = "//div[text()='₹10000-₹20000']")private WebElement priceFilterAppliedAtTopFilterList;
+	
 	
 
 	
@@ -134,6 +138,10 @@ public class LandingPage {
 	
 	public boolean samsungTextIsDisplayedAtFilters() {
 		return samsungTextAtHeader.isDisplayed();
+	}
+	
+	public String  getTextFromSAMSUNGSelectedFilter() {
+		return	samsungTextAtHeader.getText();
 	}
 	
 	public void selectcheckBoxForRAMOnMobilePhonesPage(String nameOfCheckbox) {
@@ -311,6 +319,13 @@ public class LandingPage {
 	
 	public boolean filterTitleIsDisplayedAtTopLeft() {
 		return filterTitleAtTopLeft.isDisplayed();
+	}
+	
+	public String priceFilterDropDownMaximumIsSelected() {
+	
+		String filterText=priceFilterAppliedAtTopFilterList.getText();
+		System.out.println(filterText + ": textpriceFilterDropDownMaximum");		
+		return filterText;
 	}
 	
 	
