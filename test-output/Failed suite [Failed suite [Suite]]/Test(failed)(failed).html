@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Jul 05 11:54:07 IST 2024</td>
+<td>Started on:</td><td>Mon Jul 08 12:48:05 IST 2024</td>
 </tr>
-<tr><td>Total time:</td><td>51 seconds (51069 ms)</td>
+<tr><td>Total time:</td><td>18 seconds (18268 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -77,18 +77,53 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='test.LandingPageTesting.printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage()'><b>printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage</b><br>Test class: test.LandingPageTesting<br>Parameters: mobile phones, SAMSUNG, 8 GB and Above, 147, -1</td>
-<td><div><pre>java.lang.AssertionError: expected [SAMSUNG Galaxy A15 5G (Blue, 128 GB)] but found [SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)]
-	at test.LandingPageTesting.printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage(LandingPageTesting.java:142)
+<td><div><pre>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;div class=&quot;ewzVkT _3DvUAf&quot; title=&quot;6 GB&quot;&gt;...&lt;/div&gt; is not clickable at point (254, 886). Other element would receive the click: &lt;div class=&quot;ewzVkT _3DvUAf&quot; title=&quot;4★ &amp;amp; above&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=126.0.6478.127)
+Build info: version: &apos;4.22.0&apos;, revision: &apos;c5f3146703*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [e089bfc5c7685d62c8f09d25d3396c4b, clickElement {id=f.32532845C3EF12C38E83E4C1C948FB4A.d.952DC545D9799076A99E2B3AD15636C0.e.601}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 126.0.6478.127, chrome: {chromedriverVersion: 126.0.6478.126 (d36ace6122e..., userDataDir: C:\Users\KUNALS~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55476}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55476/devtoo..., se:cdpVersion: 126.0.6478.127, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (e089bfc5c7685d62c8f09d25d3396c4b)] -&gt; xpath: //div[@class=&apos;ewzVkT _3DvUAf&apos;]]
+Session ID: e089bfc5c7685d62c8f09d25d3396c4b
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at pom.LandingPage.selectcheckBoxForRAMOnMobilePhonesPage(LandingPage.java:150)
+	at test.LandingPageTesting.printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage(LandingPageTesting.java:158)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace932312334", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace932312334'><pre>java.lang.AssertionError: expected [SAMSUNG Galaxy A15 5G (Blue, 128 GB)] but found [SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
-	at org.testng.Assert.assertEquals(Assert.java:132)
-	at org.testng.Assert.assertEquals(Assert.java:656)
-	at org.testng.Assert.assertEquals(Assert.java:666)
-	at test.LandingPageTesting.printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage(LandingPageTesting.java:142)
+... Removed 32 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace810353241", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace810353241'><pre>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;div class=&quot;ewzVkT _3DvUAf&quot; title=&quot;6 GB&quot;&gt;...&lt;/div&gt; is not clickable at point (254, 886). Other element would receive the click: &lt;div class=&quot;ewzVkT _3DvUAf&quot; title=&quot;4★ &amp;amp; above&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=126.0.6478.127)
+Build info: version: &apos;4.22.0&apos;, revision: &apos;c5f3146703*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [e089bfc5c7685d62c8f09d25d3396c4b, clickElement {id=f.32532845C3EF12C38E83E4C1C948FB4A.d.952DC545D9799076A99E2B3AD15636C0.e.601}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 126.0.6478.127, chrome: {chromedriverVersion: 126.0.6478.126 (d36ace6122e..., userDataDir: C:\Users\KUNALS~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55476}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55476/devtoo..., se:cdpVersion: 126.0.6478.127, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (e089bfc5c7685d62c8f09d25d3396c4b)] -&gt; xpath: //div[@class=&apos;ewzVkT _3DvUAf&apos;]]
+Session ID: e089bfc5c7685d62c8f09d25d3396c4b
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at pom.LandingPage.selectcheckBoxForRAMOnMobilePhonesPage(LandingPage.java:150)
+	at test.LandingPageTesting.printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage(LandingPageTesting.java:158)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -118,8 +153,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>45</td>
-<td>test.LandingPageTesting@663c9e7a</td></tr>
+<td>14</td>
+<td>test.LandingPageTesting@742ff096</td></tr>
 </table><p>
 </body>
 </html>

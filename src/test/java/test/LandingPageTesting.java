@@ -39,6 +39,37 @@ public class LandingPageTesting extends BaseClass {
 	public void launchBrowser() {
 				driver = Browser.openBroswer("https://www.flipkart.com/");
 	}
+	
+	
+	// ********* Helper methods for reducing redundancy and improving readability ******
+	
+	private void searchForProduct(String inputOnSearch) {
+		LandingPage landingPage = new LandingPage(driver);
+	    landingPage.enterInputOnSearchInputField(inputOnSearch);
+	    Wait.applyExplicitWaitForElementVisibility("//button[@aria-label='Search for Products, Brands and More']");
+	    landingPage.clickEnterByKeyboard(driver);
+	}
+	
+	private void applyPriceFilter(int xMinPriceOnSlider, int xMaxPriceOnSlider) throws InterruptedException {
+		LandingPage landingPage = new LandingPage(driver);
+	    landingPage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
+	    Thread.sleep(10000);
+	    landingPage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
+	  //  Thread.sleep(8000);
+	}
+	
+	private void applyBrandFilter(String mobileBrandName) throws InterruptedException {
+		LandingPage landingPage = new LandingPage(driver);
+	    landingPage.clickOnBrandMoreOptionsText();
+	    Wait.applyExplicitWaitForElementVisibility("//input[@placeholder='Search Brand']");
+	    landingPage.enterBrandOnSearchBrandInputField(mobileBrandName);
+	    landingPage.clickEnterByKeyboard(driver);
+	    Wait.applyExplicitWaitForClickable("//div[@title='SAMSUNG']");
+	    landingPage.clickOnSamsungOptionOnBrandFilterWindow();
+	    Wait.applyExplicitWaitForClickable("//span[text()='Apply Filters']");
+	    landingPage.clickOnApplyFilterButtonOnBrandsOptionWindow();
+	    Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
+	}
 
 	
 	
@@ -47,11 +78,10 @@ public class LandingPageTesting extends BaseClass {
 	@Test
 	public void verifyUserIsAbleToSearchProductsOnByEnetringInputsOnSearchField(String inputOnSearch) {
 		test = reports.createTest("verifyUserIsAbleToSearchProductsOnByEnetringInputsOnSearchField");
-		LandingPage landingpage = new LandingPage(driver);
-		landingpage.enterInputOnSearchInputField(inputOnSearch);
-		Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-		landingpage.clickEnterByKeyboard(driver);
-		Wait.applyExplicitWait("//span[text()='Filters']");
+		LandingPageTesting landingpagetesting = new LandingPageTesting();
+		landingpagetesting.searchForProduct(inputOnSearch);
+		LandingPage landingpage = new LandingPage(driver);		
+		Wait.applyExplicitWaitForElementVisibility("//span[text()='Filters']");
 		Assert.assertTrue(landingpage.filterTitleIsDisplayedAtTopLeft());
 		
 	}
@@ -61,16 +91,12 @@ public class LandingPageTesting extends BaseClass {
 	@Test
 	public void selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider(String inputOnSearch, int xMinPriceOnSlider, int xMaxPriceOnSlider) throws InterruptedException {
 				test = reports.createTest("selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider");
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				//Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[2]");
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='_6tw8ju']");
 				Assert.assertTrue(landingpage.checkPriceIsDisplayedisApplied());
 	}
 
@@ -79,20 +105,13 @@ public class LandingPageTesting extends BaseClass {
 	@Test
 	public void selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow(String inputOnSearch, String mobileBrandName) throws InterruptedException {
 				test = reports.createTest("selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);				
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='e+xvXX KvHRYS']");
+				//Filter with Mobile Brand
+				landingpagetesting.applyBrandFilter(mobileBrandName);
 				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@class='e+xvXX KvHRYS']");
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
 				SoftAssert softassert = new SoftAssert();
 				softassert.assertTrue(landingpage.samsungTextIsDisplayedAtFilters());
 				softassert.assertAll();
@@ -103,13 +122,14 @@ public class LandingPageTesting extends BaseClass {
 	@Test
 	public void selectRAMFromRAMCheckboxOnMobilePhonesPage(String inputOnSearch, String nameOfCheckboxForRAM) throws InterruptedException {
 				test = reports.createTest("selectRAMFromRAMCheckboxOnMobilePhonesPage");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForClickable("//div[@class='ewzVkT _3DvUAf']");
+				//Filter with RAM
 				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@class='ewzVkT _3DvUAf']");
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				//Thread.sleep(10000);
 				SoftAssert softassert = new SoftAssert();
 				softassert.assertTrue(landingpage.ramTextIsSelectedDisplayedAtFilters());
@@ -122,35 +142,26 @@ public class LandingPageTesting extends BaseClass {
 	public void printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage( String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider) throws InterruptedException {
 				test = reports.createTest("printTheCheapestAndCostliestPhoneWithItsNameAndPriceOnMobilePhonesPage");
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
-				Thread.sleep(8000);
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
+				Wait.applyExplicitWaitForElementVisibility("//div[text()='₹20000-₹30000+']");
+				//Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+				Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage	
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
 			//printTheCheapestAndCostliestPhon
 				landingpage.clickOnPriceLowToHigh();
-				Thread.sleep(8000);
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[2]/div[2]/div/div/div/a/div[2]/div[1]/div[1]");
+				Thread.sleep(10000);
 				landingpage.printNameOfCheapestAndCostliestMobilePhone(0);
 				landingpage.prinPriceOfCheapestAndCostliestMobilePhone(0);				
 				Assert.assertEquals(landingpage.printNameOfCheapestAndCostliestMobilePhone(0), "SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)");
@@ -162,43 +173,32 @@ public class LandingPageTesting extends BaseClass {
 //TC5, TC6, TC7
 	@Parameters({"inputOnSearch", "mobileBrandName", "nameOfCheckboxForRAM", "xMinPriceOnSlider", "xMaxPriceOnSlider"})
 	@Test
-	public void clickOnTheFirstCheapestAndCostliestPhoneOnMobilePhonesPage( String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider) throws InterruptedException {
+	public void clickOnTheFirstCheapestAndCostliestPhoneOnMobilePhonesPage(String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider) throws InterruptedException {
 				test = reports.createTest("clickOnTheFirstCheapestAndCostliestPhoneOnMobilePhonesPage");
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-			//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+			//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-			//printTheCheapestAndCostliestPhon
+			//clickOnTheCheapestAndCostliestPhon
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(0);
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 				Assert.assertTrue(landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed());
 		}
 		
@@ -207,40 +207,29 @@ public class LandingPageTesting extends BaseClass {
 	public void clickOnTheSecondCheapestAndCostliestPhoneOnMobilePhonesPage( String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider) throws InterruptedException {
 				test = reports.createTest("clickOnTheFirstCheapestAndCostliestPhoneOnMobilePhonesPage");
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+			//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-			//printTheCheapestAndCostliestPhon
+			//clickOnTheCheapestAndCostliestPhone
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(1);
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 				Assert.assertTrue(landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed());
 		}
 	
@@ -250,40 +239,29 @@ public class LandingPageTesting extends BaseClass {
 	public void verifySelectedProductIsAvaiableInStockOnProductDetailsPage( String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider, int selectMobileFromTopAfterFilterPriceLowToHigh) throws InterruptedException {
 				test = reports.createTest("verifySelectedProductIsAvaiableInStockOnProductDetailsPage");
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+			//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-			//printTheCheapestAndCostliestPhon
+			//clickOnTheCheapestAndCostliestPhone
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(selectMobileFromTopAfterFilterPriceLowToHigh);
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 			//Check this product is in Stock
 			//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
 				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
@@ -296,47 +274,36 @@ public class LandingPageTesting extends BaseClass {
 	public void verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage( String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider, int selectMobileFromTopAfterFilterPriceLowToHigh) throws InterruptedException {
 				test = reports.createTest("verifyUserAbleToAddMobileInCartAndThatIsDisplayedInAddToCartPage");
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+			//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-			//printTheCheapestAndCostliestPhon
+			//printTheCheapestAndCostliestPhone
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(selectMobileFromTopAfterFilterPriceLowToHigh);
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 			//Check this product is in Stock
 				//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
 				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
-				Wait.applyExplicitWait("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");
-				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"
+				Wait.applyExplicitWaitForElementVisibility("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");
+			//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"
 				Assert.assertEquals(driver.getTitle(), "Shopping Cart | Flipkart.com");
 		}
 	
@@ -348,46 +315,35 @@ public class LandingPageTesting extends BaseClass {
 				test = reports.createTest("verifyDiscuoutIsReducedFromThePriceAndValidateTotalAmmoutToBuyMobile");				
 				
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				//Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+			//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-			//printTheCheapestAndCostliestPhon
+			//printTheCheapestAndCostliestPhone
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(selectMobileFromTopAfterFilterPriceLowToHigh);
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 			//Check this product is in Stock
 			//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
 				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
 			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
-				Wait.applyExplicitWait("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@class='QqFHMw zA2EfJ _7Pd1Fp']");				
 				int expectedBuyingPrice=landingpage.expectedBuyingPriceAfterdiscountAndDeliveryChargesReducedFromTotalAmount();				
 			 //Assert that the actual buying price matches the expected buying price
 			    Assert.assertEquals(landingpage.buyingPriceOfTheProductOnAddToCartPage(), expectedBuyingPrice, "The buying price is incorrect.");
@@ -400,40 +356,30 @@ public class LandingPageTesting extends BaseClass {
 		test = reports.createTest("verifyUserIsAbleToIncreaseTheQuantityOfTheProductInAddToCartPageByUsingTheNumberInput");
 		
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+				//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-			//printTheCheapestAndCostliestPhon
+			//printTheCheapestAndCostliestPhone
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(1);
-				Thread.sleep(8000);
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[2]/div[2]/div/div/div/a/div[2]/div[1]/div[1]");
+				Thread.sleep(10000);
 				//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 			//Check this product is in Stock
 				//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
 				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
@@ -444,8 +390,8 @@ public class LandingPageTesting extends BaseClass {
 				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);
 				System.out.println(landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));
 				//System.out.println(landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");				
-				Assert.assertEquals(landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver), "2");		
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='eIDgeN']");				
+				Assert.assertEquals(landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver), productQuantityToIncrease);		
 	}
 	
 	//TC11.2 Increase the quantity of the product by 1 using the number input and verify the popup text.
@@ -455,40 +401,29 @@ public class LandingPageTesting extends BaseClass {
 		test = reports.createTest("verifyAfterSucessfullIncreaseTheQuantityOfTheProductInAddToCartPageThenPupupTextIsDisplayedToUser");
 		
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+				//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-			//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-				//printTheCheapestAndCostliestPhon
+			//printTheCheapestAndCostliestPhon
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(1);
 				Thread.sleep(8000);
 			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 			//Check this product is in Stock
 			//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
 				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
@@ -497,7 +432,8 @@ public class LandingPageTesting extends BaseClass {
 			//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"				
 			//increase the quantity of the Product by entring the integer number
 				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);				
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='eIDgeN']");
+			//Check Toster message is displayed after successfully quantity updated
 				System.out.println(landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));//Ans:productQuantityToIncrease
 				System.out.println(landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
 				System.out.println(landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '3'				
@@ -511,40 +447,29 @@ public class LandingPageTesting extends BaseClass {
 		test = reports.createTest("verifyUserIsAbleToDecreaseTheQuantityOfProductInAddToCartPageByClickOnMinusSign");
 		
 			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
-				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
 				Thread.sleep(8000);
 			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+				//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
 				Thread.sleep(8000);
-				//selectRAMFromRAMCheckboxOnMobilePhonesPage		
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
+				LandingPage landingpage = new LandingPage(driver);
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-				//printTheCheapestAndCostliestPhon
+			//printTheCheapestAndCostliestPhon
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
-				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(1);
+				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(2);
 				Thread.sleep(8000);
 				//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
 			//Check this product is in Stock
 				//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.
 				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
@@ -553,13 +478,14 @@ public class LandingPageTesting extends BaseClass {
 				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"				
 				//increase the quantity of the Product by entring the integer number
 				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);				
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='eIDgeN']");
 				System.out.println("Increased quantity of the Product :" +landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));//Ans:productQuantityToIncrease
 				System.out.println("Message thows After successfully Increased quantity of the Product : "+landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
-				System.out.println("Actual Message After successfully Increased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '2'					
+				System.out.println("Actual Message After successfully Increased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '2'	
+				Thread.sleep(10000);
 			//decrease the quantity of the Product by click on minus sign
 				landingpage.clickOnMinusSignOnAddToCartPageToReduceTheProductQuantity();
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='eIDgeN']");
 				System.out.println("Message thows After successfully decreased quantity of the Product : "+landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
 				System.out.println("Actual Message After successfully decreased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '1'				
 				Assert.assertTrue(landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());		
@@ -572,61 +498,53 @@ public class LandingPageTesting extends BaseClass {
 	public void verifyUserIsAbleRemoveProductFromAddToCartPageByClickOnRemoveButton(String inputOnSearch, String mobileBrandName, String nameOfCheckboxForRAM, int xMinPriceOnSlider, int xMaxPriceOnSlider, String productQuantityToIncrease) throws InterruptedException {
 		test = reports.createTest("verifyUserIsAbleRemoveProductFromAddToCartPageByClickOnRemoveButton");
 		
-		//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
+
+			//selectPriceOfMobileFromTwentyThouandToThirtyThousandPlusFromPriceFilterSlider
+				//Search the Product
+				LandingPageTesting landingpagetesting = new LandingPageTesting();
+				landingpagetesting.searchForProduct(inputOnSearch);	
+				Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+				landingpagetesting.applyPriceFilter(xMinPriceOnSlider, xMaxPriceOnSlider);
+				Thread.sleep(8000);
+			//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
+				landingpagetesting.applyBrandFilter(mobileBrandName);
+				//	Wait.applyExplicitWaitForElementVisibility("(//div[text()='SAMSUNG'])[1]");
+				Thread.sleep(8000);
+			//selectRAMFromRAMCheckboxOnMobilePhonesPage
 				LandingPage landingpage = new LandingPage(driver);
-				landingpage.enterInputOnSearchInputField(inputOnSearch);
-				Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
-				landingpage.selectMinPriceOnPriceFilterSlider(driver, xMinPriceOnSlider);
-				//Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[1]");
-				Thread.sleep(10000);
-				landingpage.selectMaxPriceOnPriceFilterSlider(driver, xMaxPriceOnSlider);
-				//Wait.applyExplicitWait("//div[text()='₹20000-₹30000+']");
-				Thread.sleep(8000);
-				//selectSamsungMobileFromBrandsOptionsFromFilterByUsingSearchFieldOnBrandFilterWindow
-				landingpage.clickOnBrandMoreOptionsText();
-				Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
-				landingpage.enterBrandOnsearchBrandInputField(mobileBrandName);
-				landingpage.clickEnterByKeyboard(driver);
-				Wait.applyExplicitWait("//div[@title='SAMSUNG']");
-				landingpage.clickOnSamsungOptionOnBrandFilterWindow();
-				Wait.applyExplicitWait("//span[text()='Apply Filters']");
-				landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-				Wait.applyExplicitWait("(//div[text()='SAMSUNG'])[1]");
-				Thread.sleep(8000);
-		//selectRAMFromRAMCheckboxOnMobilePhonesPage		
 				landingpage.selectcheckBoxForRAMOnMobilePhonesPage(nameOfCheckboxForRAM);
-				//Wait.applyExplicitWait("(//div[text()='8 GB and Above'])[1]");
+				//Wait.applyExplicitWaitForElementVisibility("(//div[text()='8 GB and Above'])[1]");
 				Thread.sleep(8000);
-				//printTheCheapestAndCostliestPhon
+			//printTheCheapestAndCostliestPhon
 				landingpage.clickOnPriceLowToHigh();
 				Thread.sleep(8000);
 				landingpage.clickOnNameOfCheapestAndCostliestMobilePhone(1);
 				Thread.sleep(8000);
-		//navigate to Product details page
+			//navigate to Product details page
 				ChildBrowser.switchToWindow(driver, "SAMSUNG Galaxy A15 5G ( 128 GB Storage, 8 GB RAM ) Online at Best Price On Flipkart.com");
-				Wait.applyExplicitWait("//button[@type='button']");				
-		//Check this product is in Stock
-		//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.	
+				Wait.applyExplicitWaitForElementVisibility("//button[@type='button']");				
+			//Check this product is in Stock
+			//When Buy now button is displayed to user then that Product is available in stock. And if product not in stock then Notify button is displayed instead of Buy Now button.	
 				landingpage.buyNowButtonOnMobileDetailssPageIsDisplayed();				
-		//click On Add to Cart button
+			//click On Add to Cart button
 				landingpage.clickOnAddToCartButtonOnProductDetailsPage();
 				//After click on Add To Cart Button user navigate to Add ToCart Page and page of this title is "Shopping Cart | Flipkart.com"				
-		//increase the quantity of the Product by entring the integer number
+			//increase the quantity of the Product by entring the integer number
 				landingpage.enterInputOnInputFieldForIncreaseProductQuantityOnCartPage(driver, productQuantityToIncrease);				
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='eIDgeN']");
 				System.out.println("Increased quantity of the Product :" +landingpage.getTextFromInputFieldForIncreaseProductQuantityOnCartPage(driver));//Ans:productQuantityToIncrease
 				System.out.println("Message thows After successfully Increased quantity of the Product : "+landingpage.messageThrowsAfterQuantityUpdateOnAddToCartPageIsDisplayed());//Ans : True
 				System.out.println("Actual Message After successfully Increased quantity of the Product : " +landingpage.getTextFrommessageThrowsAfterQuantityUpdateOnAddToCartPage());//And: You've changed 'SAMSUNG Galaxy A15 5G (Blue Black, 128 GB)' QUANTITY to '2'				
-		//decrease the quantity of the Product by click on minus sign
+				Thread.sleep(10000);
+			//decrease the quantity of the Product by click on minus sign
 				landingpage.clickOnMinusSignOnAddToCartPageToReduceTheProductQuantity();
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");								
-		//Click on Remove button to remove the Product from the cart
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='eIDgeN']");	
+				Thread.sleep(10000);
+			//Click on Remove button to remove the Product from the cart
 				landingpage.clickOnRemoveButtonOnAddToCartPage();
-				Wait.applyExplicitWait("(//div[text()='Remove'])[1]");
+				Wait.applyExplicitWaitForElementVisibility("(//div[text()='Remove'])[1]");
 				landingpage.clickOnRemoveButtonOnRemoveItemPopup();
-				Wait.applyExplicitWait("//div[@class='eIDgeN']");
+				Wait.applyExplicitWaitForElementVisibility("//div[@class='eIDgeN']");
 				System.out.println("Message thows After successfully Removed Product : "+landingpage.messageThrowsAfterRemoveProductFromCartPageIsDisplayed());
 				System.out.println("Actual Message After successfully Removed Product : "+landingpage.getTextFromMessageThrowsAfterRemoveProductFromCartPage());				
 				Assert.assertTrue(landingpage.messageThrowsAfterRemoveProductFromCartPageIsDisplayed());		
@@ -642,16 +560,16 @@ public class LandingPageTesting extends BaseClass {
 		test = reports.createTest("selectMotorolaMobileFromBrandsOptionsFromFilter");
 		LandingPage landingpage = new LandingPage(driver);
 		landingpage.enterInputOnSearchInputField("Mobiles");
-		Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
+		Wait.applyExplicitWaitForElementVisibility("//button[@aria-label='Search for Products, Brands and More']");
 		landingpage.clickEnterByKeyboard(driver);
-		Wait.applyExplicitWait("//div[@class='e+xvXX KvHRYS']");
+		Wait.applyExplicitWaitForElementVisibility("//div[@class='e+xvXX KvHRYS']");
 		landingpage.clickOnBrandMoreOptionsText();
-		Wait.applyExplicitWait("//input[@placeholder='Search Brand']");
+		Wait.applyExplicitWaitForElementVisibility("//input[@placeholder='Search Brand']");
 		Thread.sleep(10000);
 		landingpage.selectBrandCheckBoxOnLandingPage(nameOfCheckbox);
-		Wait.applyExplicitWait("//span[text()='Apply Filters']");
+		Wait.applyExplicitWaitForElementVisibility("//span[text()='Apply Filters']");
 		landingpage.clickOnApplyFilterButtonOnBrandsOptionWindow();
-		Wait.applyExplicitWait("(//div[text()='MOTOROLA'])[1]");
+		Wait.applyExplicitWaitForElementVisibility("(//div[text()='MOTOROLA'])[1]");
 		SoftAssert softassert = new SoftAssert();
 		softassert.assertTrue(landingpage.motorolaTextIsDisplayedAtFilters());
 		softassert.assertAll();
@@ -664,14 +582,14 @@ public class LandingPageTesting extends BaseClass {
 	test = reports.createTest("selectPriceOfMobileFromTenThousandToTwentyThouandFromPriceFilterSlider");
 	LandingPage landingpage = new LandingPage(driver);
 	landingpage.enterInputOnSearchInputField(inputOnSearch);
-	Wait.applyExplicitWait("//button[@aria-label='Search for Products, Brands and More']");
+	Wait.applyExplicitWaitForElementVisibility("//button[@aria-label='Search for Products, Brands and More']");
 	landingpage.clickEnterByKeyboard(driver);
-	Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
+	Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]");
 	landingpage.selectMinTenThousandPriceOnPriceFilterSlider(driver);
-	Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[1]/div[2]/div[1]/div/div[2]");
+	Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[1]/div[2]/div[1]/div/div[2]");
 	//Thread.sleep(10000);
 	landingpage.selectMaxTwentyThousandPriceOnPriceFilterSlider(driver);
-	Wait.applyExplicitWait("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[4]");
+	Wait.applyExplicitWaitForElementVisibility("/html/body/div/div/div[3]/div/div[1]/div/div[1]/div/section[2]/div[3]/div[1]/div[4]");
 	Assert.assertTrue(landingpage.checkPriceIsDisplayedFromTenThousandToTwentyThousand());
 	}
 */
