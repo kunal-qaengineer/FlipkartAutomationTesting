@@ -1,5 +1,6 @@
 package pom;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -52,7 +53,11 @@ public class LandingPage {
 	@FindBy (xpath = "//div[@class='eIDgeN']")private WebElement messageThrowsAfterRemoveProductFromCartPage;
 	@FindBy (xpath = "//span[text()='Filters']")private WebElement filterTitleAtTopLeft;
 	@FindBy (xpath = "//div[text()='₹10000-₹20000']")private WebElement priceFilterAppliedAtTopFilterList;
-	
+	@FindBy (xpath = "//span[@class='_1XjE3T']")private List<WebElement> productCategoriesOnHeader;
+	@FindBy (xpath = "//a[@class='_1BJVlg']")private List<WebElement> electronicMainCategories;
+	@FindBy (xpath = "//a[@class='_3490ry']")private List<WebElement> moreOptionFromLaptopAndDeskTopElectronicCategory;
+	@FindBy (xpath = "//a[@class='_1BJVlg _11MZbx']")private WebElement laptopAndDesktopOptionFromElectronicMainCategories;
+	@FindBy (xpath = "(//a[text()='Laptops'])[3]")private WebElement laptopSubOptionFromlaptopAndDesktopOptionFromElectronicMainCategories;
 	
 
 	
@@ -328,12 +333,67 @@ public class LandingPage {
 		return filterText;
 	}
 	
+	public void selectProductCategoryFromHeaders(WebDriver driver, String categoryHeader) {		
+		
+		int size = productCategoriesOnHeader.size();
+	//	System.out.println("Main Category Count: " + size);
+		
+		for (int i = 0; i < size; i++) {
+			
+				WebElement productCategory=productCategoriesOnHeader.get(i);
+				String categoryName=productCategory.getText();
+				
+					if(categoryName.equals(categoryHeader)) {
+						Actions action  = new Actions(driver);
+						action.moveToElement(productCategory).perform();
+						break;
+			}		
+		}
+	}
+	
+	public void categoryFromElectronicProducts(WebDriver driver , String actualElectronicOption) {
+		
+		int size = electronicMainCategories.size();
+	//	System.out.println("electronicMainCategories count: " + size);
+		
+			for (int i = 0; i < size; i++) {				
+				WebElement electronicCategoryOptions=electronicMainCategories.get(i);
+				String electronicOption=electronicCategoryOptions.getText();
+		//		System.out.println("electronicCategoryOptions are : ");
+		//		System.out.println(electronicOption);
+				
+					if(electronicOption.equals(actualElectronicOption)) {
+						Actions action  = new Actions(driver);
+						action.moveToElement(electronicCategoryOptions).perform();
+						break;
+					}		
+			}
+	}
+	
+	public void clickOnLaptopSubCategoryFromElectronicLaptopAndDesktopOptions(WebDriver driver, String actualLaptopAndDesktopOption) {		
+		
+		int size=moreOptionFromLaptopAndDeskTopElectronicCategory.size();
+	//	System.out.println("moreOptionFromLaptopAndDeskTopElectronicCategory count: " + size);
+		
+			for (int i = 0; i < size; i++) {					
+					WebElement LaptopAndDesktopCategoryOptions=moreOptionFromLaptopAndDeskTopElectronicCategory.get(i);
+					String laptopAndDesktopOption=LaptopAndDesktopCategoryOptions.getText();
+			//		System.out.println("LaptopAndDesktopCategoryOptions are : ");
+			//		System.out.println(laptopAndDesktopOption);
+					
+						if(laptopAndDesktopOption.equals(actualLaptopAndDesktopOption)) {
+							Actions action  = new Actions(driver);
+							action.moveToElement(LaptopAndDesktopCategoryOptions);
+							action.click();
+							action.build().perform();
+							break;
+						}		
+			}
+		
+	}
 	
 	
-	
-	
-	
-	
+
 	
 	
 	

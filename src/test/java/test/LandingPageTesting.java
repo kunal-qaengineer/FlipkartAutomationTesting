@@ -557,8 +557,6 @@ public class LandingPageTesting extends BaseClass {
 		BrokenLinks.checkAllLiksAreWorking();
 	}
 	
-
-	
 	@Parameters({"inputOnSearch", "nameOfCheckbox"})
 	@Test
 	public void selectMobileBrandFromBrandsOptionsFromBrandFilterByIndexing(String inputOnSearch, String nameOfCheckbox) throws InterruptedException {
@@ -586,7 +584,6 @@ public class LandingPageTesting extends BaseClass {
 			softassert.assertAll();
 	}
 
-
 	@Parameters({"inputOnSearch"})
 	@Test
 	public void selectPriceOfMobileFromTenThousandToTwentyThouandFromPriceFilterSlider(String inputOnSearch) throws InterruptedException {
@@ -601,8 +598,39 @@ public class LandingPageTesting extends BaseClass {
 			Thread.sleep(10000);
 			LandingPage landingpage = new LandingPage(driver);
 			Assert.assertEquals(landingpage.priceFilterDropDownMaximumIsSelected(), "₹10000-₹20000");
+	}	
+
+	@Test
+	public void verifyUserIsAbleToSelectLaptopsFromMainCategoryElectronics() throws InterruptedException {
+		test = reports.createTest("verifyUserIsAbleToSelectLaptopsFromMainCategoryElectronics");
+		LandingPage landingpage = new LandingPage(driver);
+		landingpage.selectProductCategoryFromHeaders(driver, "Electronics");
+		Wait.applyExplicitWaitForClickable("//a[@class='_1BJVlg _11MZbx']");
+		landingpage.categoryFromElectronicProducts(driver, "Laptop and Desktop");
+		//Wait.applyExplicitWaitForClickable("(//a[text()='Laptops'])[3]");
+		Thread.sleep(10000);
+		landingpage.clickOnLaptopSubCategoryFromElectronicLaptopAndDesktopOptions(driver, "Laptops");
+		
+		SoftAssert softassert = new SoftAssert();
+		softassert.assertEquals(driver.getTitle(), "Laptop Buy Online at Lowest Prices in India - Laptops Deals | Flipkart.com");
+		softassert.assertAll();
+	}	
+
+	@Test
+	public void verifyUserIsAbleToSelectWiredHeadphonesFromMainCategoryElectronics() throws InterruptedException {
+		test = reports.createTest("verifyUserIsAbleToSelectLaptopsFromMainCategoryElectronics");
+		LandingPage landingpage = new LandingPage(driver);
+		landingpage.selectProductCategoryFromHeaders(driver, "Electronics");
+		Wait.applyExplicitWaitForClickable("//a[@class='_1BJVlg _11MZbx']");
+		landingpage.categoryFromElectronicProducts(driver, "Audio");
+		//Wait.applyExplicitWaitForClickable("(//a[text()='Laptops'])[3]");
+		Thread.sleep(10000);
+		landingpage.clickOnLaptopSubCategoryFromElectronicLaptopAndDesktopOptions(driver, "Wired Headphones");
+		
+		SoftAssert softassert = new SoftAssert();
+		softassert.assertEquals(driver.getTitle(), "Headphones - Up to 80% Off on Headphones, Headset, Earphones Online | Free Delivery");
+		softassert.assertAll();
 	}
-	
 
 
 }

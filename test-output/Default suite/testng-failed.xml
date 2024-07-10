@@ -5,10 +5,10 @@
     <classes>
       <class name="test.LandingPageTesting">
         <methods>
+          <include name="verifyUserIsAbleToSelectLaptopsFromMainCategoryElectronics"/>
           <include name="logResult"/>
           <include name="clearData"/>
           <include name="logReport"/>
-          <include name="verifyAllLinksOnTheFlipkartLandingPageIsWorking"/>
           <include name="launchBrowser"/>
         </methods>
       </class> <!-- test.LandingPageTesting -->
